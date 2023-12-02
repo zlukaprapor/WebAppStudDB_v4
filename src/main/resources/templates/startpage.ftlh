@@ -51,6 +51,7 @@
         nav a:hover {
             background-color: #555;
         }
+
         #search-input {
             padding: 5px;
             border-radius: 5px;
@@ -65,15 +66,48 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .list {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .list th, .list td {
+            background-color: #f2f2f2;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+
+
+        .list tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .list tr:hover {
+            background-color: #ddd;
+        }
+        .button-link {
+            display: block;
+            margin: 0 auto;
+
+            text-decoration: none;
+            color: #0056b3;
+
+
+
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 
 <body>
 <header>
-<#--    <img id="logo" src="your_logo_path.png" alt="StudDB Logo">-->
+    <#--    <img id="logo" src="your_logo_path.png" alt="StudDB Logo">-->
     <h1>StudentDB</h1>
     <nav>
-        <a href="#">Add</a>
 
         <input type="text" id="search-input" placeholder="Search">
         <button id="search-button">Filter</button>
@@ -81,9 +115,65 @@
         <a href="#">Login</a>
     </nav>
 </header>
+<h1>Student Form</h1>
+<form method="post" action="/student/send">
+    <table>
+        <tbody>
+        <tr>
+            <td><label for="name">Name</label></td>
+            <td><input id="name" type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td><label for="surname">Surname</label></td>
+            <td><input id="surname" type="text" name="surname"></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email</label></td>
+            <td><input id="email" type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td><label for="group">Group</label></td>
+            <td><input id="group" type="text" name="group"></td>
+        </tr>
+        <tr>
+            <td><label for="faculty">Faculty</label></td>
+            <td><input id="faculty" type="text" name="faculty"></td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="submit" name="send" value="Send">
+</form>
+<table class="list">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Group</th>
+        <th>Faculty</th>
+        <th>Grades</th>
+        <th>Delete</th>
+    </tr>
+    <#list students as student>
+        <tr>
+            <td>${student.id}</td>
+            <td>${student.name}</td>
+            <td>${student.surname}</td>
+            <td>${student.email}</td>
+            <td>${student.group}</td>
+            <td>${student.faculty}</td>
+            <td>
+                <a href="${"/grades/${student.id}"}" class="button-link">View Grades</a>
+            </td>
+            <td>
+                <form method="post" action="/student/delete/${student.id}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
 
-<!-- Додайте ваш вміст тут -->
-
+        </tr>
+    </#list>
+</table>
 </body>
 
 </html>
