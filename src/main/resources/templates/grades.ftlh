@@ -66,6 +66,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         .list {
             font-family: Arial, sans-serif;
             border-collapse: collapse;
@@ -80,7 +81,6 @@
         }
 
 
-
         .list tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -88,13 +88,13 @@
         .list tr:hover {
             background-color: #ddd;
         }
+
         .button-link {
             display: block;
             margin: 0 auto;
 
             text-decoration: none;
             color: #0056b3;
-
 
 
             cursor: pointer;
@@ -104,79 +104,28 @@
 </head>
 
 <body>
-<header>
-    <#--    <img id="logo" src="your_logo_path.png" alt="StudDB Logo">-->
-    <h1>StudentDB</h1>
-    <nav>
+<h2>Grades for Student</h2>
 
-        <input type="text" id="search-input" placeholder="Search">
-        <button id="search-button">Filter</button>
+<#list disciplines as discipline>
+    <h3>${discipline.discipline}</h3>
 
-        <a href="#">Login</a>
-    </nav>
-</header>
-<h1>Student Form</h1>
-<form method="post" action="/student/send">
-    <table>
-        <tbody>
+    <table class="list">
         <tr>
-            <td><label for="name">Name</label></td>
-            <td><input id="name" type="text" name="name"></td>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>ECTS</th>
         </tr>
-        <tr>
-            <td><label for="surname">Surname</label></td>
-            <td><input id="surname" type="text" name="surname"></td>
-        </tr>
-        <tr>
-            <td><label for="email">Email</label></td>
-            <td><input id="email" type="email" name="email"></td>
-        </tr>
-        <tr>
-            <td><label for="group">Group</label></td>
-            <td><input id="group" type="text" name="group"></td>
-        </tr>
-        <tr>
-            <td><label for="faculty">Faculty</label></td>
-            <td><input id="faculty" type="text" name="faculty"></td>
-        </tr>
-        </tbody>
+        <#list grades as grade>
+            <#if grade.disciplineId == discipline.id>
+                <tr>
+                    <td>${grade.subject}</td>
+                    <td>${grade.grade}</td>
+                    <td>${grade.ects}</td>
+                </tr>
+            </#if>
+        </#list>
     </table>
-    <input type="submit" name="send" value="Send">
-</form>
-<table class="list">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Group</th>
-        <th>Faculty</th>
-        <th>Grades</th>
-        <th>Delete</th>
-    </tr>
-    <#list students as student>
-        <tr>
-            <td>${student.id}</td>
-            <td>${student.name}</td>
-            <td>${student.surname}</td>
-            <td>${student.email}</td>
-            <td>${student.group}</td>
-            <td>${student.faculty}</td>
-            <td>
-                <form method="get" action="/grades">
-                    <input type="hidden" name="studentId" value="${student.id}">
-                    <input type="submit" value="View Grades" id="viewGradesBtn">
-                </form>
-            </td>
-            <td>
-                <form method="post" action="/student/delete/${student.id}">
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-
-        </tr>
-    </#list>
-</table>
+</#list>
 </body>
 
 </html>

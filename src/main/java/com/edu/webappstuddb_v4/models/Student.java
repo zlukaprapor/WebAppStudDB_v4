@@ -1,5 +1,9 @@
 package com.edu.webappstuddb_v4.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+
 public class Student {
     private Long id;
     private String name;
