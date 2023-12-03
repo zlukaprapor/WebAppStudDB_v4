@@ -22,12 +22,12 @@ public class StartPageController {
 
 
     @GetMapping("/")
-    public String startpage(Model model) {
-        model.addAttribute("students", studentService.listStudents());
+    public String startpage(@RequestParam(name = "name", required = false) String name, Model model) {
+        model.addAttribute("students", studentService.listStudents(name));
         return "startpage";
     }
 
-    @PostMapping("/student/send")
+    @PostMapping("/student/create")
     public String sendStudent(Student student) {
         studentService.saveStudent(student);
         return "redirect:/";
@@ -39,16 +39,16 @@ public class StartPageController {
         return "redirect:/";
     }
 
-    @GetMapping("/grades")
-    public String viewGrades(@RequestParam Long studentId, Model model) {
-
-        List<Grade> studentGrades = gradesService.getGradesByStudentId(studentId);
-        List<Discipline> studentDiscipline = disciplineService.getDisciplineByStudentId(studentId);
-
-        model.addAttribute("grades", studentGrades);
-        model.addAttribute("disciplines", studentDiscipline);
-
-        return "grades";
-    }
+//    @GetMapping("/grades")
+//    public String viewGrades(@RequestParam Long studentId, Model model) {
+//
+//        List<Grade> studentGrades = gradesService.getGradesByStudentId(studentId);
+//        List<Discipline> studentDiscipline = disciplineService.getDisciplineByStudentId(studentId);
+//
+//        model.addAttribute("grades", studentGrades);
+//        model.addAttribute("disciplines", studentDiscipline);
+//
+//        return "grades";
+//    }
 
 }
