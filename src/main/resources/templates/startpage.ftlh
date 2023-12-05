@@ -27,8 +27,13 @@
             <b>
                 ${student.name} ${student.surname}
             </b>
-            ${student.student_group} ${student.faculty} | <a href="">Оцінки....</a>
+            ${student.student_group} ${student.faculty} | <a href="/grades/${student.id}">Оцінки....</a>
+
         </p>
+        <form action="/student/delete/${student.id}" method="post">
+            <input type="hidden" name="id" value="${student.id}">
+            <input type="submit" value="Видалити">
+        </form>
     </div>
 <#else>
     <h3>Студенти в базі відсутні</h3>
@@ -43,9 +48,7 @@
     Faculty:<input type="text" name="faculty"/><br><br>
     <input type="submit" value="Створити">
 </form>
-<#--<hr>-->
-<#--<form action="/student/delete/" method="post">-->
-<#--    <input type="submit" value="Видалити">-->
-<#--</form>-->
+<hr>
+
 </body>
 </html>

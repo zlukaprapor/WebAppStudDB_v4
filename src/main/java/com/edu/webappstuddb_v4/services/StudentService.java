@@ -27,7 +27,4 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-//    public void getStudentByID(Long id){
-//        return studentRepository.findById(id).orElse(null);
-//    }
 }

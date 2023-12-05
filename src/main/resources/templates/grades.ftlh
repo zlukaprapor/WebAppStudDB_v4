@@ -2,35 +2,44 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentDB</title>
+    <!-- meta та інші теги залишаються незмінними -->
 </head>
 
 <body>
 <h2>Grades for Student</h2>
-
-<#list disciplines as discipline>
-    <h3>${discipline.discipline}</h3>
-
-    <table class="list">
+<hr>
+<table class="list">
+    <tr>
+        <th>Subject</th>
+        <th>Grade</th>
+        <th>ECTS</th>
+    </tr>
+    <#list grades as grade>
         <tr>
-            <th>Subject</th>
-            <th>Grade</th>
-            <th>ECTS</th>
+            <td>${grade.subject}</td>
+            <td>${grade.grade}</td>
+            <td>${grade.ects}</td>
+            <td>
+                <form action="/grades/delete" method="post">
+                    <input type="hidden" name="gradeId" value="${grade.id}">
+                    <input type="hidden" name="studentId" value="${studentId}">
+                    <input type="submit" value="Видалити оцінку">
+                </form>
+            </td>
         </tr>
-        <#list grades as grade>
-            <#if grade.disciplineId == discipline.id>
-                <tr>
-                    <td>${grade.subject}</td>
-                    <td>${grade.grade}</td>
-                    <td>${grade.ects}</td>
-                </tr>
-            </#if>
-        </#list>
-    </table>
-</#list>
+    </#list>
+
+</table>
+<hr>
+<form action="/grades/add" method="post">
+    <input type="hidden" name="studentId" value="${studentId}">
+    Subject: <input type="text" name="subject" required><br>
+    Grade: <input type="number" name="grade" min="1" max="10" required><br>
+    ECTS: <input type="text" name="ects" required><br>
+    <input type="submit" value="Додати оцінку">
+</form>
+<hr>
+
 </body>
 
 </html>

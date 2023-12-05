@@ -39,16 +39,22 @@ public class StartPageController {
         return "redirect:/";
     }
 
-//    @GetMapping("/grades")
-//    public String viewGrades(@RequestParam Long studentId, Model model) {
-//
-//        List<Grade> studentGrades = gradesService.getGradesByStudentId(studentId);
-//        List<Discipline> studentDiscipline = disciplineService.getDisciplineByStudentId(studentId);
-//
-//        model.addAttribute("grades", studentGrades);
-//        model.addAttribute("disciplines", studentDiscipline);
-//
-//        return "grades";
-//    }
+    @GetMapping("/grades/{studentId}")
+    public String grades(@PathVariable Long studentId, Model model) {
+        List<Grade> studentGrades = gradesService.listGradesByStudentId(studentId);
+        model.addAttribute("grades", studentGrades);
+        model.addAttribute("studentId", studentId);
+        return "grades";
+    }
+    @PostMapping("/grades/add")
+    public String addGrade(@ModelAttribute Grade grade) {
+        gradesService.saveGrade(grade);
+        return "redirect:/grades/" + grade.getStudentId();
+    }
+    @PostMapping("/grades/delete")
+    public String deleteGrade(@RequestParam Long gradeId, @RequestParam Long studentId) {
+        gradesService.deleteGrade(gradeId);
+        return "redirect:/grades/" + studentId;
+    }
 
 }
