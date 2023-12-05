@@ -16,9 +16,9 @@ public class Grade {
     @Column(name = "id")
     private Long id;
     @Column(name = "studentId")
-    private int studentId;
+    private Long studentId;
     @Column(name = "disciplineId")
-    private int disciplineId;
+    private Long disciplineId;
     @Column(name = "subject")
     private String subject;
     @Column(name = "grade")

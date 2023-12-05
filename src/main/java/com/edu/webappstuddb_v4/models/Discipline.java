@@ -18,6 +18,6 @@ public class Discipline {
     @Column(name = "discipline")
     private String discipline;
     @Column(name = "studentId")
-    private int studentId;
+    private Long studentId;
 
 }

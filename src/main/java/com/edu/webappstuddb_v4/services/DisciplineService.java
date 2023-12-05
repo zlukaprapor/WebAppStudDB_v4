@@ -24,9 +24,8 @@ public class DisciplineService {
         disciplineRepository.save(discipline);
     }
 
-    public Discipline getDisciplineById(Long disciplineId) {
-        return disciplineRepository.findById(disciplineId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid discipline Id: " + disciplineId));
+    public void deleteDiscipline(Long disciplineId) {
+        disciplineRepository.deleteById(disciplineId);
     }
 }
 
