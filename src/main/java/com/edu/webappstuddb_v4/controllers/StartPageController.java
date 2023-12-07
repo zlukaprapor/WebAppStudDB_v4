@@ -48,10 +48,11 @@ public class StartPageController {
         model.addAttribute("disciplines", studentDisciplines);
         return "grades";
     }
-    @PostMapping("/grades/add")
-    public String addGrade(@ModelAttribute Grade grade) {
-        gradesService.saveGrade(grade);
 
+    @PostMapping("/grades/add")
+    public String addGrade(@ModelAttribute Grade grade,  @RequestParam(name = "disciplineId") Long disciplineId) {
+        grade.setDisciplineId(disciplineId);
+        gradesService.saveGrade(grade);
         return "redirect:/grades/" + grade.getStudentId();
     }
     @PostMapping("/grades/delete")
@@ -64,9 +65,7 @@ public class StartPageController {
         Discipline discipline = new Discipline();
         discipline.setStudentId(studentId);
         discipline.setDiscipline(disciplineName);
-
         disciplineService.saveDiscipline(discipline);
-
         return "redirect:/grades/" + studentId;
     }
 
