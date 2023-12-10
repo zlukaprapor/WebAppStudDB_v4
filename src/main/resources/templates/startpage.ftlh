@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudentDB</title>
-
 </head>
 <body>
 <header>
-    <#--    <img id="logo" src="your_logo_path.png" alt="StudDB Logo">-->
     <h1>StudentDB</h1>
     <nav>
         <form action="/" method="get">
@@ -18,6 +15,7 @@
             <input type="submit" value="Пошук">
         </form>
     </nav>
+    <a href="/login">Login</a>
 </header>
 <hr>
 <h2>Student Form</h2>
@@ -49,6 +47,5 @@
     <input type="submit" value="Створити">
 </form>
 <hr>
-
 </body>
 </html>
