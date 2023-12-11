@@ -1,15 +1,15 @@
 package com.edu.webappstuddb_v4.models;
 
 import com.edu.webappstuddb_v4.models.emums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name =  "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @ToString.Exclude
+    private List<Student> students = new ArrayList<>();
     private LocalDateTime dateOfCreated;
     @PrePersist
     private void  init(){

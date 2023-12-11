@@ -25,4 +25,7 @@ public class Student {
     private String student_group;
     @Column(name = "faculty")
     private String faculty;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
 }

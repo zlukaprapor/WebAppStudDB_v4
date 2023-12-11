@@ -9,13 +9,26 @@
 <body>
 <header>
     <h1>StudentDB</h1>
+    <hr>
+
+    <#if user.email??>
+        <h3>Імя користувача: <i>${user.name}</i></h3>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="submit" value="Вийти">
+        </form>
+        <#else >
+            <a href="/login">Зайти</a>
+    </#if>
+
+
     <nav>
         <form action="/" method="get">
             <input type="text" name="name">
             <input type="submit" value="Пошук">
         </form>
     </nav>
-    <a href="/login">Login</a>
+
 </header>
 <hr>
 <h2>Student Form</h2>
@@ -28,14 +41,17 @@
             ${student.student_group} ${student.faculty} | <a href="/grades/${student.id}">Оцінки....</a>
 
         </p>
+        <#if user.email ??>
         <form action="/student/delete/${student.id}" method="post">
             <input type="hidden" name="id" value="${student.id}">
             <input type="submit" value="Видалити">
         </form>
+        </#if>
     </div>
 <#else>
     <h3>Студенти в базі відсутні</h3>
 </#list>
+<#if user.email ??>
 <hr>
 <h3>Створити запис</h3>
 <form action="/student/create" method="post">
@@ -44,8 +60,10 @@
     Email:<input type="text" name="email"/><br><br>
     Group:<input type="text" name="student_group"/><br><br>
     Faculty:<input type="text" name="faculty"/><br><br>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Створити">
 </form>
 <hr>
+</#if>
 </body>
 </html>

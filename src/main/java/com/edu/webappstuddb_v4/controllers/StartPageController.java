@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -22,14 +24,15 @@ public class StartPageController {
 
 
     @GetMapping("/")
-    public String startpage(@RequestParam(name = "name", required = false) String name, Model model) {
+    public String startpage(@RequestParam(name = "name", required = false) String name,Principal principal, Model model) {
         model.addAttribute("students", studentService.listStudents(name));
+        model.addAttribute("user", studentService.getUserByPrincipal(principal));
         return "startpage";
     }
 
     @PostMapping("/student/create")
-    public String sendStudent(Student student) {
-        studentService.saveStudent(student);
+    public String sendStudent(Student student, Principal principal) throws IOException {
+        studentService.saveStudent(principal, student);
         return "redirect:/";
     }
 
