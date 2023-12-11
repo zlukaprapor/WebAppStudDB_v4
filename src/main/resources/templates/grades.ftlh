@@ -83,6 +83,7 @@
                 <form action="/disciplines/delete" method="post">
                     <input type="hidden" name="disciplineId" value="${discipline.id}">
                     <input type="hidden" name="studentId" value="${studentId}">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <input type="submit" value="Видалити дисципліну">
                 </form>
             </td>
@@ -103,6 +104,7 @@
                     <form action="/grades/delete" method="post">
                         <input type="hidden" name="gradeId" value="${grade.id}">
                         <input type="hidden" name="studentId" value="${studentId}">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
                         <input type="submit" value="Видалити оцінку">
                     </form>
                 </td>
@@ -115,6 +117,7 @@
                 Предмет: <input type="text" name="subject" required><br>
                 Оцінка: <input type="number" name="grade" min="10" max="100" required><br>
                 ECTS: <input type="text" name="ects" required><br>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <input type="submit" value="Додати оцінку">
             </form>
         </td>
@@ -125,6 +128,7 @@
     <input type="hidden" name="studentId" value="${studentId}">
     <label for="disciplineName">Дисципліна:</label>
     <input type="text" id="disciplineName" name="disciplineName" required/>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
     <button type="submit">Додати дисципліну</button>
 </form>
 <hr>

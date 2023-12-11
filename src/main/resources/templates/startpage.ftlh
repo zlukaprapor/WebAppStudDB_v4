@@ -44,6 +44,7 @@
         <#if user.email ??>
         <form action="/student/delete/${student.id}" method="post">
             <input type="hidden" name="id" value="${student.id}">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
             <input type="submit" value="Видалити">
         </form>
         </#if>
