@@ -79,6 +79,7 @@
         </tr>
         <tr>
             <td>${discipline.discipline}</td>
+
             <td>
                 <form action="/disciplines/delete" method="post">
                     <input type="hidden" name="disciplineId" value="${discipline.id}">
@@ -100,6 +101,7 @@
                 <td>${grade.subject}</td>
                 <td>${grade.grade}</td>
                 <td>${grade.ects}</td>
+
                 <td>
                     <form action="/grades/delete" method="post">
                         <input type="hidden" name="gradeId" value="${grade.id}">
@@ -108,6 +110,7 @@
                         <input type="submit" value="Видалити оцінку">
                     </form>
                 </td>
+
             </tr>
         </#list>
         <td>

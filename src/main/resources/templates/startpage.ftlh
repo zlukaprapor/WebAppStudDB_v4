@@ -44,7 +44,7 @@
             ${student.student_group} ${student.faculty}  <#if user.email??>| <a href="/grades/${student.id}">Оцінки....</a></#if>
 
         </p>
-        <#if user.email ??>
+        <#if user.isAdmin()>
         <form action="/student/delete/${student.id}" method="post">
             <input type="hidden" name="id" value="${student.id}">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -55,7 +55,7 @@
 <#else>
     <h3>Студенти в базі відсутні</h3>
 </#list>
-<#if user.email ??>
+<#if user.isAdmin()>
 <hr>
 <h3>Створити запис</h3>
 <form action="/student/create" method="post">
