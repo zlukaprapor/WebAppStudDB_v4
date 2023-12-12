@@ -58,6 +58,10 @@ public class StartPageController {
         gradesService.saveGrade(grade);
         return "redirect:/grades/" + grade.getStudentId();
     }
+
+
+
+
     @PostMapping("/grades/delete")
     public String deleteGrade(@RequestParam Long gradeId, @RequestParam Long studentId) {
         gradesService.deleteGrade(gradeId);

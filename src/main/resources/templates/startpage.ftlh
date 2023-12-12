@@ -17,6 +17,9 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <input type="submit" value="Вийти">
         </form>
+        <#if user.isAdmin()>
+            <a href="/admin">Панель адміністратора</a>
+            </#if>
         <#else >
             <a href="/login">Зайти</a>
     </#if>
@@ -38,7 +41,7 @@
             <b>
                 ${student.name} ${student.surname}
             </b>
-            ${student.student_group} ${student.faculty} | <a href="/grades/${student.id}">Оцінки....</a>
+            ${student.student_group} ${student.faculty}  <#if user.email??>| <a href="/grades/${student.id}">Оцінки....</a></#if>
 
         </p>
         <#if user.email ??>
