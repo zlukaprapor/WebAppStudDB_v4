@@ -25,4 +25,13 @@ public class Grade {
     private int grade;
     @Column(name = "ects")
     private String ects;
+
+    // Спеціальний конструктор без id
+    public Grade(Long studentId, Long disciplineId, String subject, int grade, String ects) {
+        this.studentId = studentId;
+        this.disciplineId = disciplineId;
+        this.subject = subject;
+        this.grade = grade;
+        this.ects = ects;
+    }
 }
