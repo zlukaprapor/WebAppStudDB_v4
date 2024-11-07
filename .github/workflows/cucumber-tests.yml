@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
             java-version: '23'
-            distribution: 'adoptopenjdk'  # Додано параметр distribution
+            distribution: 'temurin'  # Замінили adoptopenjdk на temurin
 
       - name: Cache Gradle packages
         uses: actions/cache@v3
