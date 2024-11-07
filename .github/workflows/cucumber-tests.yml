@@ -1,4 +1,4 @@
-name: Run Cucumber Tests
+name: Maven Build and Test
 
 on:
   push:
@@ -9,29 +9,21 @@ on:
       - master
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK 23
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-            java-version: '23'
-            distribution: 'temurin'  # Замінили adoptopenjdk на temurin
+          java-version: '11'
+          distribution: 'adoptopenjdk'
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      - name: Build with Maven
+        run: mvn clean install
 
-      - name: Set up Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Run Cucumber tests
-        run: ./gradlew cucumber
+      - name: Run tests
+        run: mvn test
