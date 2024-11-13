@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "0592ce71-f99d-4015-956e-f856b1bb160e",
+		"name": "WebAppStudDB API Tests - GET and POST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18360411"
+	},
+	"item": [
+		{
+			"name": "Get Data Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test('Response should contain expected data', function () {",
+							"    var responseBody = pm.response.text();",
+							"    pm.expect(responseBody).to.include('Student Form');",
+							"});",
+							"// Extract the CSRF token from the response and save it to an environment variable",
+							"var responseBody = pm.response.text();",
+							"var csrfTokenMatch = responseBody.match(/name=\"_csrf\" value=\"([^\"]+)\"/);",
+							"if (csrfTokenMatch) {",
+							"    var csrfToken = csrfTokenMatch[1];",
+							"    pm.environment.set(\"csrfToken\", csrfToken);",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Data Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Fixed syntax error in the test script",
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test('Response should contain form for authorization', function () {",
+							"    pm.expect(pm.response.text()).to.include('Авторизація');",
+							"    pm.expect(pm.response.text()).to.include('action=\"/login\"');",
+							"    pm.expect(pm.response.text()).to.include('name=\"username\"');",
+							"    pm.expect(pm.response.text()).to.include('name=\"password\"');",
+							"    pm.expect(pm.response.text()).to.include('value=\"Вхід\"');",
+							"    pm.expect(pm.response.text()).to.include('href=\"/registration\"');",
+							"});",
+							"// Extracts the CSRF token from the response and saves it to an environment variable",
+							"var responseBody = pm.response.text();",
+							"var csrfToken = responseBody.match(/name=\"_csrf\" value=\"([^\"]+)\"/)[1];",
+							"pm.environment.set('csrfToken', csrfToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Oleksandr\", \"surname\": \"Potapov\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
