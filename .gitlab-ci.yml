@@ -2,12 +2,14 @@ stages:
   - test
 
 variables:
-  COLLECTION_PATH: "./tests/WebAppStudDB API Tests - GET and POST.postman_collection.json"  # шлях до колекції API тестів
+  COLLECTION_PATH: "./tests/WebAppStudDB_API_Tests_GET_and_POST.postman_collection.json"
+  ENVIRONMENT_PATH: "./tests/environment.json"  # при потребі вкажіть ваш файл середовища
 
 api_tests:
   stage: test
   image: postman/newman:latest
   script:
+    - mkdir -p reports
     - newman run $COLLECTION_PATH --environment $ENVIRONMENT_PATH --reporters cli,junit --reporter-junit-export reports/api_test_results.xml
   artifacts:
     when: always
